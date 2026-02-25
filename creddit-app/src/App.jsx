@@ -1,16 +1,17 @@
 import { Routes, Route, Link } from "react-router-dom";
 import ForumView from "./views/forums";
 import FavouritesView from "./views/favourites";
+import "./index.css"
 
 
 export default function App() {
   return (
     <div>
-      <h1>Erin Garcia – Creddit Favourites</h1>
+      <h1 className="header">Erin Garcia – Creddit Favourites</h1>
 
-      <nav>
-        <Link to="/">Forums</Link> |{" "}
-        <Link to="/favourites">Favourites</Link>
+      <nav className="nav">
+        <Link to="/">Forums </Link>
+        <Link to="/favourites"> Favourites</Link>
       </nav>
 
       <Routes>

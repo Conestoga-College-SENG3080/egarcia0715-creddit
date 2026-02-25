@@ -24,11 +24,43 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
+
+/* Fixed title at top */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background-color: #242424;
+  z-index: 1000;
+}
+
+/* Main app content */
+.main {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px; /* space for header */
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;   /* 👈 space between items */
+  margin-bottom: 2rem;
+  margin-top: 120px;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
 
 h1 {
   font-size: 3.2em;
@@ -47,7 +79,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #646cff;
 }
 button:focus,
 button:focus-visible {
