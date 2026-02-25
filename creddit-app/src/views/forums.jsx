@@ -1,21 +1,29 @@
+/*
+ * Filename		: 
+ * Project		:
+ * By			: Erin Garcia
+ * Date 		:
+ * Description	:
+ */
+
+
 import { useState } from "react";
 import { apiGet } from "../api/creddit";
 
+
 export default function ForumView() {
-    // List of forums (you can add more if the API supports)
+    //list of forums
     const forumOptions = ["funny","askcreddit","gaming","aww","music","worldnews","pics","movies","todayilearned","science","videos","showerthoughts","news","jokes","askscience","food","iama","nottheonion","diy",
                           "gifs","books","space","lifeprotips","explainlikeimfive","me-irl","personalfinance","technology","fitness","lifehacks","politics","unexpected","odddlysatisfying","travel","minecraft",
                           "dadjokes","facepalm","mademesmile", ];
-
     const [forum, setForum] = useState(forumOptions[0]); // default selection
     const [posts, setPosts] = useState([]);
 
     async function loadPosts() {
         try {
+            //endpoint
             console.log("Loading posts for forum:", forum);
-
-            // Correct endpoint: GET /api/posts?forum={forum}&sort=hot&limit=10
-            const res = await apiGet(`/forums/${forum}`);
+            const res = await apiGet(`/forums/${forum}?sortBy=hot&limit=10`);
 
             console.log("API response:", res.data);
             setPosts(res.data);
@@ -24,34 +32,47 @@ export default function ForumView() {
             console.error("Failed to load posts:", err);
             alert("Could not load posts. Check console.");
         }
-    }
+    }//end loadPosts()
 
     function addFavourite(postId) {
         const favs = JSON.parse(localStorage.getItem("favourites")) || [];
-        if (!favs.includes(postId)) {
-            favs.push(postId);
-            localStorage.setItem("favourites", JSON.stringify(favs));
+
+        //sends an alert that the post is ALREADY added
+        if (favs.includes(postId)) {
+            alert("Already in favourites");
+            return;
         }
-    }
+
+        //sends an alert that hte post is added
+        favs.push(postId);
+        localStorage.setItem("favourites", JSON.stringify(favs));
+        alert("Added to favourites!");
+    }//end addFavourite()
 
     return (
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <h2>Select Forum</h2>
 
-            <select value={forum} onChange={e => setForum(e.target.value)}>
-                {forumOptions.map(f => (
+            <div className="forum-controls">
+                <select
+                    className="forum-select"
+                    value={forum}
+                    onChange={e => setForum(e.target.value)}
+                >
+                    {forumOptions.map(f => (
                     <option key={f} value={f}>{f}</option>
-                ))}
-            </select>
+                    ))}
+                </select>
 
-            <button onClick={loadPosts} style={{ marginLeft: 10 }}>Load Posts</button>
+                <button onClick={loadPosts}>Load Posts</button>
+            </div>
 
-            <hr />
+            <hr/>
 
-            {posts.length === 0 && <p>No posts loaded.</p>}
+            {posts.length === 0 && <p >No posts loaded.</p>}
 
             {posts.map(post => (
-                <div key={post.id} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
+                <div key={post.id} className="post-card">
                     <h3>{post.title}</h3>
                     <p>{post.content}</p>
                     <p>By {post.author} | Likes: {post.totalLikes}</p>
@@ -59,5 +80,5 @@ export default function ForumView() {
                 </div>
             ))}
         </div>
-    );
-}
+    );//end return
+}//end ForumView()
