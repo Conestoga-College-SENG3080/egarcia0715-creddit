@@ -1,9 +1,9 @@
 /*
- * Filename		: 
- * Project		:
+ * Filename		: forum.jsx
+ * Project		: frontend-assignment-garciaerin
  * By			: Erin Garcia
- * Date 		:
- * Description	:
+ * Date 		: 2026-03-01
+ * Description	: This file contains the code for the forums handling - displaying the posts, adding to favourites, selecting forums.
  */
 
 
@@ -16,9 +16,10 @@ export default function ForumView() {
     const forumOptions = ["funny","askcreddit","gaming","aww","music","worldnews","pics","movies","todayilearned","science","videos","showerthoughts","news","jokes","askscience","food","iama","nottheonion","diy",
                           "gifs","books","space","lifeprotips","explainlikeimfive","me-irl","personalfinance","technology","fitness","lifehacks","politics","unexpected","odddlysatisfying","travel","minecraft",
                           "dadjokes","facepalm","mademesmile", ];
-    const [forum, setForum] = useState(forumOptions[0]); // default selection
+    const [forum, setForum] = useState(forumOptions[0]);
     const [posts, setPosts] = useState([]);
 
+    //LOADPOSTS
     async function loadPosts() {
         try {
             //endpoint
@@ -34,6 +35,8 @@ export default function ForumView() {
         }
     }//end loadPosts()
 
+
+    //ADDFAVOURITE
     function addFavourite(postId) {
         const favs = JSON.parse(localStorage.getItem("favourites")) || [];
 
@@ -49,28 +52,21 @@ export default function ForumView() {
         alert("Added to favourites!");
     }//end addFavourite()
 
+
     return (
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <h2>Select Forum</h2>
 
             <div className="forum-controls">
-                <select
-                    className="forum-select"
-                    value={forum}
-                    onChange={e => setForum(e.target.value)}
-                >
-                    {forumOptions.map(f => (
-                    <option key={f} value={f}>{f}</option>
-                    ))}
+                <select className="forum-select" value={forum} onChange={e => setForum(e.target.value)}>
+                    {forumOptions.map(f => (<option key={f} value={f}>{f}</option>))}
                 </select>
-
                 <button onClick={loadPosts}>Load Posts</button>
             </div>
 
             <hr/>
 
             {posts.length === 0 && <p >No posts loaded.</p>}
-
             {posts.map(post => (
                 <div key={post.id} className="post-card">
                     <h3>{post.title}</h3>

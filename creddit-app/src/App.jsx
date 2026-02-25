@@ -1,9 +1,9 @@
 /*
- * Filename		: 
- * Project		:
- * By			: Erin Garcia
- * Date 		:
- * Description	:
+ * Filename		  : App.jsx
+ * Project		  : frontend-assignment-garciaerin
+ * By			      : Erin Garcia
+ * Date 		    : 2026-03-01
+ * Description	: This file contains the main home page of the web app.
  */
 
 

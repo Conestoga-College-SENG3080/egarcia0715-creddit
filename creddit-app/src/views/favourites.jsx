@@ -1,9 +1,9 @@
 /*
- * Filename		: 
- * Project		:
+ * Filename		: favourites.jsx
+ * Project		: frontend-assignment-garciaerin
  * By			: Erin Garcia
- * Date 		:
- * Description	:
+ * Date 		: 2026-03-01
+ * Description	: This file contains the favourites handling - displaying favourited posts, removing posts from favourites.
  */
 
 
@@ -14,6 +14,8 @@ import { apiGet } from "../api/creddit";
 export default function FavouritesView() {
     const [posts, setPosts] = useState([]);
 
+
+    //LOADFAVOURITES
     async function loadFavourites() {
         const ids = JSON.parse(localStorage.getItem("favourites")) || [];
         const results = await Promise.all(
@@ -22,6 +24,8 @@ export default function FavouritesView() {
         setPosts(results.map(r => r.data));
     }//end loadFavourites(0)
 
+
+    //REMOVEFAVOURITE
     function removeFavourite(id) {
         const updated = JSON.parse(localStorage.getItem("favourites"))
         .filter(x => x !== id);
@@ -30,6 +34,7 @@ export default function FavouritesView() {
     }//end removeFavourite()
 
     useEffect(() => {loadFavourites();}, []);
+
 
     return (
         <div style={{ maxWidth: 800, margin: "0 auto" }}>

@@ -1,10 +1,10 @@
 
 /*
- * Filename		: 
- * Project		:
+ * Filename		: creddit.js
+ * Project		: frontend-assignment-garciaerin
  * By			: Erin Garcia
- * Date 		:
- * Description	:
+ * Date 		: 2026-03-01
+ * Description	: This file contains the Creddit API access.
  */
 
 
